@@ -29,13 +29,14 @@ hangman_stages = [
 ]
 
 
-while count < 8 and len(correctGuesses) < len(word):        # stop when either count = 8 or all letters are guessed correctly
+
+while count < 8 and not all(letter in correctGuesses for letter in word):        # stop when either count = 8 or all letters are guessed correctly
     
     while True:
         newLetter = input("Player 2 please guess a letter: ")
         newLetter = newLetter.upper()                       # use only uppercase to get caseinsensitivity
         if newLetter.isalpha()  and  newLetter not in allGuesses and len(newLetter) == 1:
-            allGuesses = allGuesses + [newLetter]
+            allGuesses.append(newLetter)
             break
         elif newLetter in allGuesses:
             print("You already guessed this letter. Please try again.")
@@ -44,7 +45,7 @@ while count < 8 and len(correctGuesses) < len(word):        # stop when either c
 
 
     if newLetter in word:
-        correctGuesses = correctGuesses + [newLetter]
+        correctGuesses.append(newLetter)
         print(f"You guessed correct! '{newLetter}' is part of the word.")
         for i in word:
             if i not in correctGuesses:
@@ -59,7 +60,7 @@ while count < 8 and len(correctGuesses) < len(word):        # stop when either c
         print(f"You have now used {count+1}/8 wrong guesses.")          
         count+=1
 
-if count == 8:
+if all(letter in correctGuesses for letter in word):
     print("Oh no! You have too many wrong guesses. Player 2 lost.") 
 elif len(word) == len(correctGuesses):
     print("Congratulations, you guessed the correct word. Player 2 won!")
