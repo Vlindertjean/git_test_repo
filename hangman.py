@@ -1,4 +1,9 @@
-word = input("Let’s play hangman! \n Player 1: Please choose a word: ")
+while True:
+    word = input("Let’s play hangman! \nPlayer 1: Please choose a word: ")
+    if word.isalpha():              # checks if the word contains only alphabetic characters
+        break                       # exit the loop if the word is valid
+    else:
+        print("Only words with standard letters are allowed. Try again!")
 
 print ("Player 1 has chosen a word:")
 for i in word:
@@ -9,7 +14,8 @@ word = word.upper()                                         # use only uppercase
 
 
 count = 0
-correctGuesses = []   
+correctGuesses = []
+allGuesses = []   
 
 hangman_stages = [
     "+ - - - +\n|\n|\n|\n|\n|\n_____________",
@@ -24,8 +30,18 @@ hangman_stages = [
 
 
 while count < 8 and len(correctGuesses) < len(word):        # stop when either count = 8 or all letters are guessed correctly
-    newLetter = input("Player 2 please guess a letter: ")
-    newLetter = newLetter.upper()                           # use only uppercase to get caseinsensitivity
+    
+    while True:
+        newLetter = input("Player 2 please guess a letter: ")
+        newLetter = newLetter.upper()                       # use only uppercase to get caseinsensitivity
+        if newLetter.isalpha()  and  newLetter not in allGuesses and len(newLetter) == 1:
+            allGuesses = allGuesses + [newLetter]
+            break
+        elif newLetter in allGuesses:
+            print("You already guessed this letter. Please try again.")
+        else: 
+            print("Only single alphabetic letters allowed. Please try again.")
+
 
     if newLetter in word:
         correctGuesses = correctGuesses + [newLetter]
