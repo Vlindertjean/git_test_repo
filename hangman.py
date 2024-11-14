@@ -1,5 +1,6 @@
 word = input("Let’s play hangman! \n Player 1: Please choose a word: ")
-print ("Player 1 chose a word:")
+print ("Player 1 has chosen a word:")
+
 for i in word:
     print("_", end= " ")
 print("")
@@ -8,18 +9,23 @@ word = word.upper()                                         # use only uppercase
 
 
 count = 0
+correctLetters = []                          
 
-                                     # use only uppercase to get caseinsensitivity
-
-while count <8:
+while count <8 and len(correctLetters)<len(word):
     newLetter = input("Player 2 please guess a letter: ")
-    newLetter = newLetter.upper()
+    newLetter = newLetter.upper()                           # use only uppercase to get caseinsensitivity
 
     if newLetter in word:
-        print(f"You guessed correct! '{newLetter}' is Part of the word.")
+        correctLetters = correctLetters + [newLetter]
+        print(f"You guessed correct! '{newLetter}' is part of the word.")
+        for i in word:
+            if i not in correctLetters:
+                print("_", end = " ")
+            else:
+                print (i, end = " ")
 
     else:
-        print(f"You guessed wrong.'{newLetter}' is Part of the word.")
+        print(f"You guessed wrong. '{newLetter}' is part of the word.")
         if count == 0:
             print("+ - - - +\n|\n|\n|\n|\n|\n|\n_____________")
         elif count == 1:
