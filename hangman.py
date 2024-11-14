@@ -39,11 +39,12 @@ while count < 8 and len(correctLetters) < len(word):        # stop when either c
 
     else:
         print(f"You guessed wrong. '{newLetter}' is not part of the word.")
-        print(hangman_stages[count])           
+        print(hangman_stages[count]) 
+        print(f"You have now {count}/8 wrong guesses.")          
         count+=1
 if count == 8:
-    print("Oh no! You have too many wrong guesses. You lost.") 
+    print("Oh no! You have too many wrong guesses. Player 2 lost.") 
 elif len(word) == len(correctLetters):
-    print("Congratulations, you won!")
+    print("Congratulations, you guessed the correct word. Player 2 won!")
 
 print("Game ends.")
