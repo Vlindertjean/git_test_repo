@@ -47,22 +47,25 @@ while count < 8 and not all(letter in correctGuesses for letter in word):       
     if newLetter in word:
         correctGuesses.append(newLetter)
         print(f"You guessed correct! '{newLetter}' is part of the word.")
-        for i in word:
-            if i not in correctGuesses:
-                print("_", end = " ")
-            else:
-                print (i, end = " ")
-        print("")
+
 
     else:
         print(f"You guessed wrong. '{newLetter}' is not part of the word.")
         print(hangman_stages[count]) 
         print(f"You have now used {count+1}/8 wrong guesses.")          
         count+=1
+    
+    # show current progress in both cases 
+    for i in word:
+        if i not in correctGuesses:
+                print("_", end = " ")
+        else:
+            print (i, end = " ")
+    print("\n")
 
-if all(letter in correctGuesses for letter in word):
+if count == 8:
     print("Oh no! You have too many wrong guesses. Player 2 lost.") 
-elif len(word) == len(correctGuesses):
+else:
     print("Congratulations, you guessed the correct word. Player 2 won!")
 
 print("Game ends.")
