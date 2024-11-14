@@ -9,7 +9,19 @@ word = word.upper()                                         # use only uppercase
 
 
 count = 0
-correctLetters = []                          
+correctLetters = []   
+
+hangman_stages = [
+    "+ - - - +\n|\n|\n|\n|\n|\n_____________",
+    "+ - - - +\n|       o\n|\n|\n|\n|\n_____________",
+    "+ - - - +\n|       o\n|       |\n|       |\n|\n|\n_____________",
+    "+ - - - +\n|       o\n|      \| \n|       |\n|\n|\n_____________",
+    "+ - - - +\n|       o\n|      \|/\n|       |\n|\n|\n_____________",
+    "+ - - - +\n|       o\n|      \|/\n|       |\n|      /  \n|\n_____________",
+    "+ - - - +\n|       o\n|      \|/\n|       |\n|      / \\\n|\n_____________",
+    "+ - - - +\n| /     o\n|/     \|/\n|       |\n|      / \\\n|\n_____________"
+]
+
 
 while count < 8 and len(correctLetters) < len(word):        # stop when either count = 8 or all letters are guessed correctly
     newLetter = input("Player 2 please guess a letter: ")
@@ -26,26 +38,12 @@ while count < 8 and len(correctLetters) < len(word):        # stop when either c
         print("")
 
     else:
-        print(f"You guessed wrong. '{newLetter}' is part of the word.")
-        if count == 0:
-            print("+ - - - +\n|\n|\n|\n|\n|\n|\n_____________")
-        elif count == 1:
-            print("+ - - - +\n|       o\n|         \n|        \n|         \n|\n_____________")
-        elif count == 2:
-            print("+ - - - +\n|       o\n|       | \n|       |\n|         \n|\n_____________")
-        elif count == 3:
-            print("+ - - - +\n|       o\n|      \| \n|       |\n|         \n|\n_____________")
-        elif count == 4:
-            print("+ - - - +\n|       o\n|      \|/\n|       |\n|         \n|\n_____________")
-        elif count == 5:
-            print("+ - - - +\n|       o\n|      \|/\n|       |\n|      /  \n|\n_____________")
-        elif count == 6:
-            print("+ - - - +\n|       o\n|      \|/\n|       |\n|      / \\\n|\n_____________")
-        else: 
-            print("+ - - - +\n| /     o\n|/     \|/\n|       |\n|      / \\\n|\n_____________")
-            print("Oh no! You have too many wrong guesses. You lost.")           
-        
+        print(f"You guessed wrong. '{newLetter}' is not part of the word.")
+        print(hangman_stages[count])           
         count+=1
+if count == 8:
+    print("Oh no! You have too many wrong guesses. You lost.") 
+elif len(word) == len(correctLetters):
+    print("Congratulations, you won!")
 
-else:
-    print("Game ends.")
+print("Game ends.")
